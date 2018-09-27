@@ -8,7 +8,12 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: () => import('@/view'),
+      component: () => import('@/view/Table/Index'),
+    },
+    {
+      path: '/classify',
+      name: 'classify',
+      component: () => import('@/view/Classify/Index'),
     },
   ],
 });

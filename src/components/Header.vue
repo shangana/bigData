@@ -22,6 +22,6 @@ header {
   height: 80px;
   line-height: 80px;
   width: 100%;
-  border-bottom: 1px solid #666;
+  border-bottom: 1px solid #e4e4e4;
 }
 </style>
