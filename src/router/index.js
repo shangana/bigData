@@ -15,5 +15,20 @@ export default new Router({
       name: 'classify',
       component: () => import('@/view/Classify/Index'),
     },
+    {
+      path: '/domino',
+      name: 'domino',
+      component: () => import('@/view/Domino/Index'),
+    },
+    {
+      path: '/page',
+      name: 'page',
+      component: () => import('@/view/Page/Index'),
+    },
+    {
+      path: '/district',
+      name: 'district',
+      component: () => import('@/view/District/Index'),
+    },
   ],
 });

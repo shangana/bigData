@@ -3,9 +3,9 @@
     <ul>
       <li><router-link to="/">访问明细</router-link></li>
       <li><router-link to="/classify">来源分类</router-link></li>
-      <li><router-link to="/">来路域名</router-link></li>
-      <li><router-link to="/">来路页面</router-link></li>
-      <li><router-link to="/">地区分布</router-link></li>
+      <li><router-link to="/domino">来路域名</router-link></li>
+      <li><router-link to="/page">来路页面</router-link></li>
+      <li><router-link to="/district">地区分布</router-link></li>
     </ul>
   </aside>
 </template>

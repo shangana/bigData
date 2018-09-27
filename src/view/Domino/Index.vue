@@ -18,7 +18,6 @@
 <script>
 import Message from '@/components/Message';
 import Echar from '@/components/Echar';
-import service from '@/service';
 export default {
   data () {
     return {

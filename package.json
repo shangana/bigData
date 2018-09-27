@@ -16,6 +16,7 @@
   "dependencies": {
     "animate.css": "^3.7.0",
     "axios": "^0.18.0",
+    "echarts": "^4.2.0-rc.1",
     "element-ui": "^2.4.7",
     "sass-loader": "^7.1.0",
     "vue": "^2.5.2",
