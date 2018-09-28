@@ -4,25 +4,25 @@
     border
     style="width: 100%">
     <el-table-column
-      prop="date"
+      prop="access_time"
       label="浏览时间"
       width="180">
     </el-table-column>
     <el-table-column
-      prop="name"
+      prop="reference_url"
       label="页面来源"
       width="180">
     </el-table-column>
     <el-table-column
-      prop="address"
+      prop="access_url"
       label="受访">
     </el-table-column>
     <el-table-column
-      prop="ip"
+      prop="ip_address"
       label="IP">
     </el-table-column>
     <el-table-column
-      prop="add"
+      prop="address"
       label="地区">
     </el-table-column>
   </el-table>

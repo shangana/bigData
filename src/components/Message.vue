@@ -1,10 +1,6 @@
 <template>
   <div class="container">
     <div class="session">
-      <p>来访次数</p>
-      <p>{{visiCount}}</p>
-    </div>
-    <div class="session">
       <p>IP</p>
       <p>{{ip}}</p>
     </div>
@@ -19,9 +15,6 @@
 <script>
 export default {
   props: {
-    visiCount: {
-      type: Number,
-    },
     ip: {
       type: Number,
     },
@@ -43,7 +36,7 @@ export default {
 
   .session {
     float: left;
-    width: 30%;
+    width: 45%;
     border: 1px solid #e4e4e4;
     padding: 10px;
     text-align: center;

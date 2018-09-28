@@ -11,59 +11,90 @@
         <Table :tableData="tableData"></Table>
       </el-tab-pane>
     </el-tabs>
-    <el-pagination
-      @size-change="handleSizeChange"
+    <el-pagination v-if="hasShowPage"
       @current-change="handleCurrentChange"
-      :page-size="100"
+      :page-size="10"
       layout="prev, pager, next, jumper"
-      :total="1000">
+      :total="count">
     </el-pagination>
   </section>
 </template>
 
 <script>
+import service from '@/service';
 import Table from './Table';
 export default {
   data () {
     return {
       activeName: 'first',
 
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄',
-        ip: '255.255.255.255',
-        add: '广东省',
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄',
-        ip: '255.255.255.255',
-        add: '广东省',
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄',
-        ip: '255.255.255.255',
-        add: '广东省',
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄',
-        ip: '255.255.255.255',
-        add: '广东省',
-      }],
+      tableData: [],
+      count: 0,
+      reqData: {},
     };
   },
-  methods: {
-    handleClick (tab, event) {
-      console.log(tab, event);
+  computed: {
+    hasShowPage () {
+      return this.count > 10;
     },
-    handleSizeChange (val) {
-      console.log(`每页 ${val} 条`);
+  },
+  created () {
+    let endTime = Math.round(new Date().getTime() / 1000);
+    this.reqData = {
+      end_time: endTime,
+    };
+    this.getTables(this.reqData);
+  },
+  methods: {
+    async getTables (reqData) {
+      let res = await service.fetchTable(reqData);
+      this.tableData = res.data;
+      this.count = res.total_count;
+    },
+    handleClick (tab, event) {
+      if (tab.name === 'first') {
+        let endTime = Math.round(new Date().getTime() / 1000);
+        this.reqData = {
+          end_time: endTime,
+        };
+        this.getTables(this.reqData);
+      } else if (tab.name === 'second') {
+        // 昨天
+        let myDate = new Date();
+        myDate.setHours(0);
+        myDate.setMinutes(0);
+        myDate.setSeconds(0);
+        myDate.setMilliseconds(0);
+        myDate.setDate(new Date().getDate() - 1);
+        let startTime = Math.round(new Date(myDate).getTime() / 1000);
+        this.reqData = {
+          start_time: startTime,
+        };
+        this.getTables(this.reqData);
+      } else {
+        // 前天
+        let myDate = new Date();
+        myDate.setHours(0);
+        myDate.setMinutes(0);
+        myDate.setSeconds(0);
+        myDate.setMilliseconds(0);
+        myDate.setDate(new Date().getDate() - 2);
+        let startTime = Math.round(new Date(myDate).getTime() / 1000);
+
+        myDate.setDate(new Date().getDate() - 1);
+        let endTime = Math.round(new Date(myDate).getTime() / 1000);
+        this.reqData = {
+          start_time: startTime,
+          end_time: endTime,
+        };
+        this.getTables(this.reqData);
+      }
     },
     handleCurrentChange (val) {
-      console.log(`当前页: ${val}`);
+      this.reqData = Object.assign({}, this.reqData, {
+        page: val - 1,
+      });
+      this.getTables(this.reqData);
     },
   },
   components: {

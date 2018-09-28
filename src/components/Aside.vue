@@ -1,11 +1,11 @@
 <template>
   <aside>
     <ul>
-      <li><router-link to="/">访问明细</router-link></li>
-      <li><router-link to="/classify">来源分类</router-link></li>
-      <li><router-link to="/domino">来路域名</router-link></li>
-      <li><router-link to="/page">来路页面</router-link></li>
-      <li><router-link to="/district">地区分布</router-link></li>
+      <router-link to="/"><li>访问明细</li></router-link>
+      <router-link to="/classify"><li>来源分类</li></router-link>
+      <router-link to="/domino"><li>来路域名</li></router-link>
+      <router-link to="/page"><li>来路页面</li></router-link>
+      <router-link to="/district"><li>地区分布</li></router-link>
     </ul>
   </aside>
 </template>

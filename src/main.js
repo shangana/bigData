@@ -7,6 +7,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 // 引入echarts
 import echarts from 'echarts';
+import 'echarts/map/js/china';
 
 Vue.prototype.$echarts = echarts;
 

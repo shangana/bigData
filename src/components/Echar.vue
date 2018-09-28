@@ -1,22 +1,13 @@
 <template>
   <div class="echars">
-    <div id="Roundpiechart" style="width: 480px;height:400px;float: left;"></div>
-    <div id="Foldlinediagram" style="width:580px;height:400px;float: left;"></div>
+    <div id="Roundpiechart" style="width: 560px;height:400px;float: left;"></div>
+    <div id="Foldlinediagram" style="width: 560px;height:400px;float: left;"></div>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    visiCount: {
-      type: Number,
-    },
-    ip: {
-      type: Number,
-    },
-    sumCount: {
-      type: Number,
-    },
   },
   data () {
     return {

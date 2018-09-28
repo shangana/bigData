@@ -1,24 +1,26 @@
 <template>
-  <section>
+  <section class="sesopnw">
     <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
       <el-tab-pane label="今天" name="first">
-        <Table :tableData="tableData"></Table>
+        <Table class="tables" :tableData="tableData"></Table>
       </el-tab-pane>
       <el-tab-pane label="昨天" name="second">
-        <Table :tableData="tableData"></Table>
+        <Table class="tables" :tableData="tableData"></Table>
       </el-tab-pane>
       <el-tab-pane label="最近7日" name="third">
-        <Table :tableData="tableData"></Table>
+        <Table class="tables" :tableData="tableData"></Table>
       </el-tab-pane>
       <el-tab-pane label="最近30日" name="four">
-        <Table :tableData="tableData"></Table>
+        <Table class="tables" :tableData="tableData"></Table>
       </el-tab-pane>
     </el-tabs>
+    <Echar></Echar>
   </section>
 </template>
 
 <script>
 import Table from './Table';
+import Echar from './Echar';
 export default {
   data () {
     return {
@@ -53,14 +55,23 @@ export default {
     },
   },
   components: {
-    Table,
+    Table, Echar,
   },
 };
 </script>
 
 <style lang='scss' scoped>
-.el-pagination {
-  text-align: right;
-  margin-top: 20px;
+.sesopnw {
+  position: relative;
+}
+.tables {
+  position: absolute;
+  top: 430px;
+  left: 0;
+}
+</style>
+<style>
+.el-tabs__content {
+  overflow: inherit;
 }
 </style>

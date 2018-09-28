@@ -10,7 +10,7 @@
       <el-tab-pane label="最近30日" name="four">
       </el-tab-pane>
     </el-tabs>
-    <Message :visiCount="visiCount" :ip="ip" :sumCount="sumCount"></Message>
+    <Message :ip="ip" :sumCount="sumCount"></Message>
     <Echar></Echar>
   </section>
 </template>
@@ -18,14 +18,10 @@
 <script>
 import Message from '@/components/Message';
 import Echar from '@/components/Echar';
-import service from '@/service';
 export default {
   data () {
     return {
       activeName: 'first',
-
-      // 来访次数
-      visiCount: 100,
       // IP
       ip: 123123,
       // 站内总浏览数
