@@ -36,7 +36,7 @@ export default {
 
   .session {
     float: left;
-    width: 48%;
+    width: 47%;
     border: 1px solid #e4e4e4;
     padding: 10px;
     text-align: center;
