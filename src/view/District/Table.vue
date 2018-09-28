@@ -4,21 +4,21 @@
     border
     style="width: 100%">
     <el-table-column
-      prop="date"
+      prop="address"
       label="名称"
       width="180">
     </el-table-column>
     <el-table-column
-      prop="name"
+      prop="access_count"
       label="浏览次数"
       width="180">
     </el-table-column>
     <el-table-column
-      prop="address"
+      prop="percent"
       label="占比">
     </el-table-column>
     <el-table-column
-      prop="ip"
+      prop="ip_count"
       label="IP">
     </el-table-column>
   </el-table>

@@ -7,13 +7,38 @@
 
 <script>
 export default {
+  props: {
+    tableData: {
+      type: Array,
+    },
+    echarData: {
+      type: Array,
+    },
+  },
   data () {
     return {
     };
   },
+  computed: {
+    nameArr () {
+      return this.echarData.length ? this.echarData.map(item => item.address) : ['无数据'];
+    },
+    contentDataArr () {
+      return this.echarData.length ? this.echarData.map(item => {
+        return {value: item.access_count, name: item.address};
+      }) : [{name: '无数据', value: 100}];
+    },
+    // 地图数据
+    contentArr () {
+      return this.tableData.length ? this.tableData.map(item => {
+        return {value: item.access_count, name: item.address};
+      }) : [{name: '无数据', value: 100}];
+    },
+  },
   mounted () {
-    console.log(111);
-    this.init();
+    this.$watch('contentArr', this.init, {
+      deep: true,
+    });
   },
   methods: {
     init () {
@@ -39,7 +64,7 @@ export default {
           // top: 'middle',
           bottom: 10,
           left: 'center',
-          data: ['广东省', '福建省', '江西省', '江苏省', '北京省', '其他省'],
+          data: this.nameArr,
         },
         series: [
           {
@@ -47,32 +72,7 @@ export default {
             radius: '65%',
             center: ['50%', '50%'],
             selectedMode: 'single',
-            data: [
-              {
-                value: 200,
-                name: '广东省',
-              },
-              {
-                value: 535,
-                name: '福建省',
-              },
-              {
-                value: 510,
-                name: '江西省',
-              },
-              {
-                value: 634,
-                name: '江苏省',
-              },
-              {
-                value: 634,
-                name: '北京省',
-              },
-              {
-                value: 634,
-                name: '其他省',
-              },
-            ],
+            data: this.contentDataArr,
             itemStyle: {
               emphasis: {
                 shadowBlur: 10,
@@ -83,27 +83,9 @@ export default {
           },
         ],
       };
-      let mydata = [
-        {name: '北京', value: '100'}, {name: '天津', value: this.randomData()},
-        {name: '上海', value: this.randomData()}, {name: '重庆', value: this.randomData()},
-        {name: '河北', value: this.randomData()}, {name: '河南', value: this.randomData()},
-        {name: '云南', value: this.randomData()}, {name: '辽宁', value: this.randomData()},
-        {name: '黑龙江', value: this.randomData()}, {name: '湖南', value: this.randomData()},
-        {name: '安徽', value: this.randomData()}, {name: '山东', value: this.randomData()},
-        {name: '新疆', value: this.randomData()}, {name: '江苏', value: this.randomData()},
-        {name: '浙江', value: this.randomData()}, {name: '江西', value: this.randomData()},
-        {name: '湖北', value: this.randomData()}, {name: '广西', value: this.randomData()},
-        {name: '甘肃', value: this.randomData()}, {name: '山西', value: this.randomData()},
-        {name: '内蒙古', value: this.randomData()}, {name: '陕西', value: this.randomData()},
-        {name: '吉林', value: this.randomData()}, {name: '福建', value: this.randomData()},
-        {name: '贵州', value: this.randomData()}, {name: '广东', value: this.randomData()},
-        {name: '青海', value: this.randomData()}, {name: '西藏', value: this.randomData()},
-        {name: '四川', value: this.randomData()}, {name: '宁夏', value: this.randomData()},
-        {name: '海南', value: this.randomData()}, {name: '台湾', value: this.randomData()},
-        {name: '香港', value: this.randomData()}, {name: '澳门', value: this.randomData()},
-      ];
+
       let optionMap = {
-        ackgroundColor: '#FFFFFF',
+        ackgroundColor: '#FFF',
         title: {
           subtext: '',
           x: 'center',
@@ -137,9 +119,10 @@ export default {
               show: true,
             },
           },
-          data: mydata, // 数据
+          data: this.contentArr, // 数据
         }],
       };
+      console.log(this.contentArr);
       // 使用刚指定的配置项和数据显示图表
       myChart1.setOption(option1);
       myChart2.setOption(optionMap);

@@ -39,62 +39,56 @@ export default {
     },
   },
   created () {
-    let endTime = Math.round(new Date().getTime() / 1000);
-    this.reqData = {
-      end_time: endTime,
-    };
-    this.getTables(this.reqData);
+    this.getTables();
   },
   methods: {
-    async getTables (reqData) {
-      let res = await service.fetchTable(reqData);
+    async getTables () {
+      let res = await service.fetchTable(this.reqData);
       this.tableData = res.data;
       this.count = res.total_count;
     },
     handleClick (tab, event) {
       if (tab.name === 'first') {
-        let endTime = Math.round(new Date().getTime() / 1000);
-        this.reqData = {
-          end_time: endTime,
-        };
-        this.getTables(this.reqData);
-      } else if (tab.name === 'second') {
-        // 昨天
-        let myDate = new Date();
-        myDate.setHours(0);
-        myDate.setMinutes(0);
-        myDate.setSeconds(0);
-        myDate.setMilliseconds(0);
-        myDate.setDate(new Date().getDate() - 1);
-        let startTime = Math.round(new Date(myDate).getTime() / 1000);
-        this.reqData = {
-          start_time: startTime,
-        };
-        this.getTables(this.reqData);
+        this.reqData = {};
       } else {
-        // 前天
-        let myDate = new Date();
-        myDate.setHours(0);
-        myDate.setMinutes(0);
-        myDate.setSeconds(0);
-        myDate.setMilliseconds(0);
-        myDate.setDate(new Date().getDate() - 2);
-        let startTime = Math.round(new Date(myDate).getTime() / 1000);
-
-        myDate.setDate(new Date().getDate() - 1);
-        let endTime = Math.round(new Date(myDate).getTime() / 1000);
+        let startDay = 0;
+        let endDay = 0;
+        if (tab.name === 'second') {
+          // 昨天
+          startDay = 1;
+          endDay = 0;
+        } else {
+          // 前天
+          startDay = 2;
+          endDay = 1;
+        }
+        let [startTime, endTime] = this.setReqDate(startDay, endDay);
         this.reqData = {
           start_time: startTime,
           end_time: endTime,
         };
-        this.getTables(this.reqData);
       }
+      this.getTables();
+    },
+    setReqDate (startDay, endDay) {
+      let myDate = new Date();
+      myDate.setHours(0);
+      myDate.setMinutes(0);
+      myDate.setSeconds(0);
+      myDate.setMilliseconds(0);
+      myDate.setDate(new Date().getDate() - startDay);
+      let startTime = Math.round(new Date(myDate).getTime() / 1000);
+
+      myDate.setDate(new Date().getDate() - endDay);
+      let endTime = Math.round(new Date(myDate).getTime() / 1000);
+
+      return [startTime, endTime];
     },
     handleCurrentChange (val) {
       this.reqData = Object.assign({}, this.reqData, {
         page: val - 1,
       });
-      this.getTables(this.reqData);
+      this.getTables();
     },
   },
   components: {

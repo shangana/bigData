@@ -36,11 +36,11 @@ export default {
 
   .session {
     float: left;
-    width: 45%;
+    width: 48%;
     border: 1px solid #e4e4e4;
     padding: 10px;
     text-align: center;
-    line-height: 30px;
+    line-height: 26px;
   }
 }
 </style>
